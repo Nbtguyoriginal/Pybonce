@@ -1,6 +1,6 @@
 # PyBonce: Python Script Analyzer 🐍🔍
 
-![PyBonce Logo](link_to_logo_image)  <!-- If you have a logo, replace 'link_to_logo_image' with the actual link -->
+![PyBonce Logo]([link_to_logo_image](https://clipart-library.com/clipart/Lcd5axbbi.htm))  
 
 PyBonce is an advanced Python script analyzer that leverages the power of OpenAI's API. It's designed to provide developers with insights on performance, style, security, and functionality of their Python code. With a user-friendly GUI, PyBonce makes code analysis a breeze!
 
