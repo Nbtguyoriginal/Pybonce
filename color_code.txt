@@ -1,0 +1,46 @@
+1. `#FF5733` - Bright orange-red
+2. `#33FF57` - Vibrant green
+3. `#5733FF` - Bright blue
+4. `#FF33A1` - Vivid pink
+5. `#33A1FF` - Sky blue
+6. `#A133FF` - Purple
+7. `#FF8333` - Tangerine orange
+8. `#33FF83` - Mint green
+9. `#8333FF` - Indigo
+10. `#FF3383` - Rose pink
+11. `#33FFA1` - Turquoise
+12. `#A1FF33` - Lime green
+13. `#FFA133` - Sunflower yellow
+14. `#33A1FF` - Ocean blue
+15. `#A133A1` - Magenta
+16. `#FF33FF` - Bright pink
+17. `#33FFFF` - Cyan
+18. `#FF833A` - Coral
+19. `#83A1FF` - Periwinkle
+20. `#A183FF` - Lavender
+21. `#FFA183` - Peach
+22. `#83FFA1` - Seafoam green
+23. `#A1FF83` - Spring green
+24. `#FF83A1` - Salmon pink
+25. `#83A1A1` - Teal
+26. `#A183A1` - Mauve
+27. `#A1A183` - Olive
+28. `#FFA1A1` - Light red
+29. `#A1FFA1` - Light green
+30. `#A1A1FF` - Light blue
+31. `#FFC1C1` - Pastel red
+32. `#C1FFC1` - Pastel green
+33. `#C1C1FF` - Pastel blue
+34. `#FFC183` - Pastel orange
+35. `#83FFC1` - Pastel turquoise
+36. `#C183FF` - Pastel purple
+37. `#FF83C1` - Pastel pink
+38. `#C1A183` - Taupe
+39. `#83C1A1` - Aquamarine
+40. `#C183A1` - Dusty rose
+
+# These colors span a wide range of hues and should provide a diverse palette for any application or design needs.
+# change the color for the highlight in the config 
+
+-line that needs the color-
+"HIGHLIGHT_COLOR = 'Color_here'  # Color used to highlight specific lines in the analysis log Different colors in Color_codes.txt"

@@ -1,0 +1,3 @@
+# Ensure you have Python installed (e.g., Python 3.8 or newer)
+openai  # Check for the latest version on PyPI.
+
