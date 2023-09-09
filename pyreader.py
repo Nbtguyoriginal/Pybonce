@@ -17,9 +17,10 @@ class AnalysisState:
 state = AnalysisState()
 
 def setup_text_tags():
-    analysis_text.tag_configure('sending', background='lightblue', font=("Arial", 10))
-    analysis_text.tag_configure('analysis', background='lightgreen', font=("Arial", 10))
-    analysis_text.tag_configure('title', background='lightyellow', font=("Arial", 10, 'bold'))
+    analysis_text.tag_configure('sending', background=config.SENDING_COLOR, font=("Arial", 10))
+    analysis_text.tag_configure('analysis', background=config.ANALYSIS_COLOR, font=("Arial", 10))
+    analysis_text.tag_configure('title', background=config.TITLE_COLOR, font=("Arial", 10, 'bold'))
+    analysis_text.tag_configure('highlight', background=config.HIGHLIGHT_COLOR, font=("Arial", 10))
 
 def select_directory():
     folder_selected = filedialog.askdirectory()
@@ -149,69 +150,10 @@ def abort_analysis():
 
 TOKEN_COST_PER_THOUSAND = 0.0015 #specified here https://openai.com/pricing
 
-def process_directory(directory):
-    python_files = [f for f in os.listdir(directory) if f.endswith('.py')]
-    
-    total_tokens_used = 0
-    total_estimated_cost = 0.0
-    
-    # Initialize the progress bar
-    progress_var = tk.DoubleVar()
-    progress_bar = Progressbar(root, variable=progress_var, maximum=len(python_files))
-    progress_bar.pack(fill=tk.X, padx=10, pady=5)
-    
-    for index, file in enumerate(python_files):
-        if state.abort_event.is_set():
-            break
-        file_path = os.path.join(directory, file)
-        if file_path in state.analyzed_files:
-            continue
-        with open(file_path, 'r') as f:
-            lines_buffer = []
-            for line in f:
-                lines_buffer.append(line)
-                if len(lines_buffer) >= config.LINES_PER_API_CALL:
-                    # Display the lines being sent with 'sending' tag
-                    analysis_text.insert(tk.END, f"Sending lines for analysis from {file}:\n", 'title')
-                    analysis_text.insert(tk.END, ''.join(lines_buffer) + "\n\n", 'sending')
-                    
-                    context, highlighted_lines, tokens_used, estimated_cost = establish_context(lines_buffer, file)
-                    
-                    # Display the analysis with 'analysis' tag
-                    analysis_text.insert(tk.END, f"Analysis for {file}:\n", 'title')
-                    analysis_text.insert(tk.END, ''.join(context) + "\n\n", 'analysis')
-                    
-                    total_tokens_used += tokens_used
-                    total_estimated_cost += estimated_cost
-                    stats_label.config(text=f"Tokens Used: {total_tokens_used}\nEstimated Cost: ${total_estimated_cost:.2f}")
-                    
-                    lines_buffer = []
-            
-            if lines_buffer:
-                # Display the lines being sent with 'sending' tag
-                analysis_text.insert(tk.END, f"Sending lines for analysis from {file}:\n", 'title')
-                analysis_text.insert(tk.END, ''.join(lines_buffer) + "\n\n", 'sending')
-                
-                context, highlighted_lines, tokens_used, estimated_cost = establish_context(lines_buffer, file)
-                
-                # Display the analysis with 'analysis' tag
-                analysis_text.insert(tk.END, f"Analysis for {file}:\n", 'title')
-                analysis_text.insert(tk.END, ''.join(context) + "\n\n", 'analysis')
-                
-                total_tokens_used += tokens_used
-                total_estimated_cost += estimated_cost
-                stats_label.config(text=f"Tokens Used: {total_tokens_used}\nEstimated Cost: ${total_estimated_cost:.2f}")
-        state.analyzed_files.add(file_path)
-        
-        
-        progress_var.set(index + 1)
-        root.update_idletasks()
-
-    progress_bar.pack_forget()
 
 
 root = tk.Tk()
-root.title("Python Directory Analyzer")
+root.title("Pybonce"":" "The Python Pulse")
 root.geometry("800x600")
 
 button_frame = tk.Frame(root, bg="white")
