@@ -41,10 +41,15 @@ import config
              populate_tree(tree, entry.path, oid) 
   
  
-  def write_log(content, log_type="default"):
-    log_filename = f"{log_type}_log.txt"
+  def write_log(content, log_type=config.LOG_TYPES["default"]):
+    if log_type == config.LOG_TYPES["default"]:
+        log_filename = config.LOG_FILE
+    else:
+        log_filename = f"{log_type}_log.txt"
+    
     with open(log_filename, "a") as log_file:
         log_file.write(content + "\n\n")
+
 
     
  def start_analysis(): 
@@ -143,10 +148,16 @@ import config
     context = response.choices[0].message['content'].strip()
     highlighted_lines = [context]
 
-    # Log the analysis results
-    write_log(context, log_type=config.CURRENT_LOG_TYPE)
+    # Log the analysis results based on content type
+    if "NOTE:" in context:
+        write_log(context, log_type=config.LOG_TYPES["notes"])
+    elif "MODIFICATION:" in context:
+        write_log(context, log_type=config.LOG_TYPES["modifications"])
+    else:
+        write_log(context, log_type=config.LOG_TYPES["default"])
 
     return [context], highlighted_lines, tokens_used, estimated_cost
+
 
   
   
