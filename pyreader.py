@@ -192,6 +192,7 @@ def warp_analysis(lines, filename, warp_rules):
 def apply_warp_updates(directory, warp_updates_log):
     warp_rules = config.WARP_RULES
     updated_code_list = []
+    placements = []  # Log to store the details of the changes
 
     for file, context in warp_updates_log:
         file_path = os.path.join(directory, file)
@@ -208,7 +209,26 @@ def apply_warp_updates(directory, warp_updates_log):
         # Save the updated line next to the original line
         updated_code_list.append((original_lines[line_number], updated_line))
 
+        # Log the placement details
+        placement_detail = {
+            "file_path": file_path,
+            "line_number": line_number,
+            "original_code": original_lines[line_number],
+            "updated_code": updated_line
+        }
+        placements.append(placement_detail)
+
+    # Write the placements log to a file
+    with open("placements_log.txt", "w") as log_file:
+        for placement in placements:
+            log_file.write(f"File: {placement['file_path']}\n")
+            log_file.write(f"Line Number: {placement['line_number']}\n")
+            log_file.write(f"Original Code: {placement['original_code']}\n")
+            log_file.write(f"Updated Code: {placement['updated_code']}\n")
+            log_file.write("-" * 50 + "\n")
+
     return updated_code_list
+
 
   
  def abort_analysis(): 
