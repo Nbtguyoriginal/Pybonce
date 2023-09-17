@@ -26,6 +26,9 @@ LOG_TYPES = {
 # Set the current log type
 CURRENT_LOG_TYPE = LOG_TYPES["default"]
 
+WARP_ITERATIONS = 3  # Number of times the warp process should iterate
+WARP_RULES = "Your specific warp rules or criteria here"
+#warp rules iterative generation 
 
 # Note: setting the "lines_per_api_call" any lower than "10" is not advised unless your code is very compact or you have a very small script.
 
