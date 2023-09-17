@@ -159,7 +159,57 @@ import config
     return [context], highlighted_lines, tokens_used, estimated_cost
 
 
-  
+ def time_warp_analysis(directory):
+    python_files = [f for f in os.listdir(directory) if f.endswith('.py')]
+    warp_rules = config.WARP_RULES
+    warp_updates_log = []
+
+    for file in python_files:
+        file_path = os.path.join(directory, file)
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+            context = warp_analysis(lines, file, warp_rules)
+            warp_updates_log.append((file, context))
+
+    return warp_updates_log
+
+def warp_analysis(lines, filename, warp_rules):
+    prompt = (f"Analyze the Python script named '{filename}' based on the warp rules: '{warp_rules}'. "
+              "Provide detailed notes about improvements, specifying the line number and the exact change required. "
+              "Begin the analysis:\n\n" + "".join(lines))
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant with skills as if you are a seasoned Python and Windows expert."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    
+    context = response.choices[0].message['content'].strip()
+    return context
+
+def apply_warp_updates(directory, warp_updates_log):
+    warp_rules = config.WARP_RULES
+    updated_code_list = []
+
+    for file, context in warp_updates_log:
+        file_path = os.path.join(directory, file)
+        with open(file_path, 'r') as f:
+            original_lines = f.readlines()
+
+        # Extract the line number and change details from context
+        # This is a placeholder and needs to be implemented based on the specific format of the context
+        line_number, change_details = extract_line_and_change(context)
+
+        # Pass the line and change details to ChatGPT with warp rules
+        updated_line = get_updated_line(original_lines[line_number], change_details, warp_rules)
+        
+        # Save the updated line next to the original line
+        updated_code_list.append((original_lines[line_number], updated_line))
+
+    return updated_code_list
+
   
  def abort_analysis(): 
      if state.current_thread: 
@@ -191,6 +241,10 @@ import config
   
  tree = ttk.Treeview(root) 
  tree.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10) 
+
+ time_warp_button = tk.Button(button_frame, text="Time Warp", padx=10, pady=5, fg="white", bg="#263D42", command=time_warp_analysis)
+ time_warp_button.grid(row=0, column=3, padx=5)
+
   
  stats_label = tk.Label(root, text="Tokens Used: 0\nEstimated Cost: $0.00", bg="white", font=("Arial", 10)) 
  stats_label.pack(pady=10) 
