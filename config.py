@@ -8,9 +8,9 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------
 # OpenAI Configuration   
 # OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 
-LINES_PER_API_CALL = 20  # Number of lines to send to OpenAI API in a single call
+LINES_PER_API_CALL = 10  # Number of lines to send to OpenAI API in a single call
 
 # UI Configuration
 HIGHLIGHT_COLOR = '#FF33A1'  # Color used to highlight specific lines in the analysis log
@@ -19,18 +19,54 @@ ANALYSIS_COLOR = '#83C1A1'  # Aquamarine
 TITLE_COLOR = '#FFFFE0'     # lightyellow
 
 # Logging Configuration
-LOG_FILE = 'Reader.txt'  
+LOG_FILE = 'audit.txt'  
 # File where the analysis log is saved
 
 # Define different types of logs
 LOG_TYPES = {
-    "default": "default",
-    "modifications": "modifications",
-    "notes": "notes"
+    "default": "Default",  # General-purpose logs
+    "modifications": "Possible_mods",  # Logs related to changes or modifications
+    "General_notes": "General_notes",  # General remarks or observations
+    "Detailed_notes": "Detailed_notes",  # In-depth remarks or observations
+    "better_code": "better_code",  # Suggestions for code improvements
+    "error": "Error",  # Logs for error events
+    "warning": "Warning",  # Logs for warning events
+    "info": "Information",  # General informational logs
+    "debug": "Debug",  # Logs used for debugging purposes
+    "critical": "Critical",  # Logs for critical events
+    "authentication": "Authentication",  # Logs related to user authentication
+    "authorization": "Authorization",  # Logs related to user permissions
+    "database": "Database",  # Logs related to database operations
+    "network": "Network",  # Logs related to network operations
+    "performance": "Performance",  # Logs related to performance metrics
+    "audit": "Audit",  # Logs for auditing purposes
+    "backup": "Backup",  # Logs related to data backups
+    "maintenance": "Maintenance",  # Logs related to system maintenance
+    "startup": "Startup",  # Logs generated at system startup
+    "shutdown": "Shutdown",  # Logs generated at system shutdown
+    "configuration": "Configuration",  # Logs related to system configurations
+    "deprecation": "Deprecation",  # Logs related to deprecated features
+    "migration": "Migration",  # Logs related to data migration
+    "user_activity": "User_Activity",  # Logs related to user actions
+    "system_activity": "System_Activity",  # Logs related to system actions
+    "security": "Security",  # Logs related to security events
+    "access": "Access",  # Logs related to resource access
+    "transaction": "Transaction",  # Logs related to transactions
+    "synchronization": "Synchronization",  # Logs related to data synchronization
+    "communication": "Communication",  # Logs related to system communications
+    "service": "Service",  # Logs related to services or daemons
+    "resource": "Resource",  # Logs related to resource usage
+    "cache": "Cache",  # Logs related to caching operations
+    "schedule": "Schedule",  # Logs related to scheduled tasks
+    "update": "Update",  # Logs related to updates or patches
+    "deletion": "Deletion",  # Logs related to data deletion
+    "creation": "Creation",  # Logs related to data creation
+    "validation": "Validation"  # Logs related to data validation
 }
 
+
 # Set the current log type
-CURRENT_LOG_TYPE = LOG_TYPES["default"]
+CURRENT_LOG_TYPE = LOG_TYPES["audit"]
 
 WARP_ITERATIONS = 3  # Number of times the warp process should iterate
 WARP_RULES = "Your specific warp rules or criteria here"
