@@ -22,13 +22,18 @@ TITLE_COLOR = '#FFFFE0'     # lightyellow
 LOG_FILE = 'audit.txt'  
 # File where the analysis log is saved
 
+#use the first instance of the log name 
+#ex "better_code": "Better_code", you use "beter_code" here--- CURRENT_LOG_TYPE = LOG_TYPES["beter_code"]
+# this will return a log with  Suggestions for code improvements 
+#be sure to change your log file name to refelct the type of log your makng for easy orginization 
+
 # Define different types of logs
 LOG_TYPES = {
     "default": "Default",  # General-purpose logs
     "modifications": "Possible_mods",  # Logs related to changes or modifications
     "General_notes": "General_notes",  # General remarks or observations
     "Detailed_notes": "Detailed_notes",  # In-depth remarks or observations
-    "better_code": "better_code",  # Suggestions for code improvements
+    "better_code": "Better_code",  # Suggestions for code improvements
     "error": "Error",  # Logs for error events
     "warning": "Warning",  # Logs for warning events
     "info": "Information",  # General informational logs
