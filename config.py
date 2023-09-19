@@ -8,7 +8,7 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------
 # OpenAI Configuration   
 # OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 
 LINES_PER_API_CALL = 20  # Number of lines to send to OpenAI API in a single call
 
@@ -37,7 +37,7 @@ WARP_RULES = "Your specific warp rules or criteria here"
 #warp rules iterative generation 
 
 # Specify the method to use: 'combine', 'sequential', or 'selective' -- explained below 
-WARP_METHOD = 'combine'  # Change this to your desired method
+WARP_METHOD = 'sequential'  # Change this to your desired method
 
 
 WARP_RULES_SET_1 = """
@@ -127,7 +127,7 @@ SELECTED_WARP_SETS = [WARP_RULES_SET_1, WARP_RULES_SET_2]
 # Do not modify anything below this point. This section is for user information only.
 
 # ------------------- API Call Configuration -------------------
-# It's recommended to set "lines_per_api_call" to a minimum of "10" for optimal results.
+# It's recommended to set "/lines_per_api_call/" to a minimum of "10" for optimal results.
 # If your code isn't well described in the log or GUI, consider adjusting this value.
 # However, setting it below "10" is not advised for compact code or small scripts.
 #setting bellow 10 can break the script or cost hundreds of dollars for very small code bases 
@@ -158,36 +158,10 @@ SELECTED_WARP_SETS = [WARP_RULES_SET_1, WARP_RULES_SET_2]
 # Adjust the rules and guiding questions to fit your specific needs and context.
 
 # --------------------------
-# Configuration for pyreader.py
+# Configuration notes for pyreader.py
 # --------------------------
 
-# OpenAI Configuration
-API_KEY = ''  # OpenAI API Key
-LINES_PER_API_CALL = 20  # Number of lines to send to OpenAI API in a single call
 
-# UI Configuration
-HIGHLIGHT_COLOR = '#FF33A1'  # Color used to highlight specific lines in the analysis log
-SENDING_COLOR = '#FFA1A1'  # Light red
-ANALYSIS_COLOR = '#83C1A1'  # Aquamarine
-TITLE_COLOR = '#FFFFE0'     # lightyellow
-
-# Logging Configuration
-LOG_FILE = 'Oompa_loompa.txt'  
-# File where the analysis log is saved
-
-# Define different types of logs
-LOG_TYPES = {
-    "default": "default",
-    "modifications": "modifications",
-    "notes": "notes"
-}
-
-# Set the current log type
-CURRENT_LOG_TYPE = LOG_TYPES["default"]
-
-WARP_ITERATIONS = 3  # Number of times the warp process should iterate
-WARP_RULES = "Your specific warp rules or criteria here"
-#warp rules iterative generation 
 
 # Note: setting the "lines_per_api_call" any lower than "10" is not advised unless your code is very compact or you have a very small script.
 
