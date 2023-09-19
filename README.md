@@ -35,11 +35,14 @@ PyBonce is an advanced Python script analyzer that leverages the power of OpenAI
 
 2. Update the config.py file with your OpenAI API key.
 
+
 📖 Usage
 Run pybonce.py.
 Use the GUI to select a directory containing Python files.
 Click "Start Analysis" to initiate the code review.
 View results in the GUI and in the specified log file.
+
+"**Important Advisory for Users:** If you haven't been directly involved in the development of this project, please exercise caution. We strongly recommend utilizing the current release version available for general use. The main directory, especially in the development branch, contains configurations and settings that might need slight modifications to function optimally. These adjustments are typically handled by our development team. Using the current release ensures that you're working with a stable, tested, and optimized version of the software, minimizing potential issues or disruptions."
 
 📈 Cost Implications
 Each API call to OpenAI incurs a cost based on the number of tokens processed. Ensure you're aware of the potential costs, especially when analyzing large codebases.
