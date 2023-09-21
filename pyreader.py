@@ -7,9 +7,11 @@ import config
 from tkinter.ttk import Progressbar
 import webbrowser
 import shutil
+from PyCells import Brain_matter
 
 
 openai.api_key = config.API_KEY
+brain_matter = Brain_matter()
 
 
 class AnalysisState:
