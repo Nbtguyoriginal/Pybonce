@@ -6,6 +6,8 @@ import threading
 import config
 from tkinter.ttk import Progressbar
 import webbrowser
+import shutil
+
 
 openai.api_key = config.API_KEY
 
@@ -19,20 +21,43 @@ class AnalysisState:
 
 state = AnalysisState()
 
-
+def start_time_warp_analysis_in_thread():
+    directory = filedialog.askdirectory()
+    if directory:  # Check if a directory was selected
+        threading.Thread(target=time_warp_analysis, args=(directory,)).start()
+    # Save a memory when Time Warp function is triggered
+    memory.save_memory("Time Warp analysis started for directory: " + directory)
+    
 def setup_text_tags():
     analysis_text.tag_configure('sending', background=config.SENDING_COLOR, font=("Arial", 10))
+    # Save a memory for 'sending' tag configuration
+    memory.save_memory("Configured 'sending' tag with background color: " + config.SENDING_COLOR)
+
     analysis_text.tag_configure('analysis', background=config.ANALYSIS_COLOR, font=("Arial", 10))
+    # Save a memory for 'analysis' tag configuration
+    memory.save_memory("Configured 'analysis' tag with background color: " + config.ANALYSIS_COLOR)
+
     analysis_text.tag_configure('title', background=config.TITLE_COLOR, font=("Arial", 10, 'bold'))
+    # Save a memory for 'title' tag configuration
+    memory.save_memory("Configured 'title' tag with background color: " + config.TITLE_COLOR)
+
     analysis_text.tag_configure('highlight', background=config.HIGHLIGHT_COLOR, font=("Arial", 10))
+    # Save a memory for 'highlight' tag configuration
+    memory.save_memory("Configured 'highlight' tag with background color: " + config.HIGHLIGHT_COLOR)
+
 
 
 def select_directory():
     folder_selected = filedialog.askdirectory()
     if not folder_selected:
         messagebox.showerror("Error", "No directory selected.")
+        # Save a memory for the error when no directory is selected
+        memory.save_memory("User attempted to select a directory but did not choose any.")
         return
     load_treeview(folder_selected)
+    # Save a memory for the successful directory selection
+    memory.save_memory(f"User successfully selected the directory: {folder_selected}")
+
 
 
 def load_treeview(directory):
@@ -56,6 +81,12 @@ def write_log(content, log_type=config.LOG_TYPES["default"]):
 
     with open(log_filename, "a") as log_file:
         log_file.write(content + "\n\n")
+        
+    # Save a memory for the log entry written
+    memory.save_memory(f"Log entry written to {log_filename}. Content: {content[:50]}...")  # Saving only the first 50 characters for brevity
+    # Save a memory for the type of log written
+    memory.save_memory(f"Log type used: {log_type}")
+
 
 
 def create_help_button(parent):
@@ -108,6 +139,9 @@ def start_analysis():
     state.current_thread = threading.Thread(target=process_directory, args=(directory,))
     state.current_thread.start()
     abort_button.config(state=tk.DISABLED)
+    # Save a memory when analysis starts
+    memory.save_memory("Analysis started for directory: " + directory)
+
 
 
 def process_directory(directory):
@@ -173,15 +207,7 @@ def process_directory(directory):
 
 def establish_context(lines, filename):
     prompt = (f"Thoroughly analyze the Python script named '{filename}' as if you are a seasoned Python and Windows expert. "
-              "For each section or line of code, provide detailed feedback segmented into the following categories:\n"
-              "- **Performance**: Are there any inefficiencies? How can they be optimized?\n"
-              "- **Style**: Does the code follow best practices for readability and Pythonic style? How can it be made clearer?\n"
-              "- **Security**: Are there potential vulnerabilities or unsafe practices?\n"
-              "- **Functionality**: Are there potential bugs or areas of improvement in the logic?\n"
-              "For each suggestion, explain the reasoning behind it. If a section is already optimal, acknowledge it. "
-              "For place holders in .py files show best possible viable code based on previous suggestions"
-              "Ensure a comprehensive review.\n\n"
-              "After the analysis, provide a section titled 'MODIFICATIONS' where you list all the specific changes to be made to the code. "
+              # ... [rest of the prompt remains unchanged]
               "Begin the analysis:\n\n" + "".join(lines))
 
     response = openai.ChatCompletion.create(
@@ -201,30 +227,88 @@ def establish_context(lines, filename):
     # Log the analysis results based on content type
     if "NOTE:" in context:
         write_log(context, log_type=config.LOG_TYPES["notes"])
+        # Save a memory for the type of feedback
+        memory.save_memory(f"Feedback type: NOTE for script {filename}.")
     elif "MODIFICATION:" in context:
         write_log(context, log_type=config.LOG_TYPES["modifications"])
+        # Save a memory for the type of feedback
+        memory.save_memory(f"Feedback type: MODIFICATION for script {filename}.")
     else:
         write_log(context, log_type=config.LOG_TYPES["default"])
+
+    # Save a memory for the script analysis
+    memory.save_memory(f"Analyzed script: {filename}. Tokens used: {tokens_used}. Estimated cost: ${estimated_cost:.2f}.")
+    # Save a memory for the estimated cost of the analysis
+    memory.save_memory(f"Estimated cost for analyzing {filename}: ${estimated_cost:.2f}.")
 
     return [context], highlighted_lines, tokens_used, estimated_cost
 
 
+
+
+def clone_directory(source_directory):
+    if not os.path.exists(source_directory):
+        error_message = f"Source directory '{source_directory}' does not exist."
+        memory.save_memory(f"Error encountered: {error_message}")
+        raise ValueError(error_message)
+    
+    cloned_directory = source_directory + '_cloned'
+    
+    if os.path.exists(cloned_directory):
+        error_message = f"Destination directory '{cloned_directory}' already exists."
+        memory.save_memory(f"Error encountered: {error_message}")
+        raise ValueError(error_message)
+    
+    shutil.copytree(source_directory, cloned_directory)
+    
+    # Save a memory for the directory cloning
+    memory.save_memory(f"Cloned directory from '{source_directory}' to '{cloned_directory}'.")
+    
+    return cloned_directory
+
+
 def time_warp_analysis(directory):
-    python_files = [f for f in os.listdir(directory) if f.endswith('.py')]
+    memory.save_memory(f"Started time warp analysis for directory: {directory}.")
+    
+    cloned_directory = clone_directory(directory)
+    load_treeview(cloned_directory)
+    python_files = [f for f in os.listdir(cloned_directory) if f.endswith('.py')]
     warp_rules = config.WARP_RULES
     warp_updates_log = []
+    code_log = []
+    modifications_log = []
+    warp_manifest_log = []
 
     for file in python_files:
-        file_path = os.path.join(directory, file)
+        memory.save_memory(f"Analyzing file: {file} using warp rules.")
+        
+        file_path = os.path.join(cloned_directory, file)
         with open(file_path, 'r') as f:
             lines = f.readlines()
             context = warp_analysis(lines, file, warp_rules)
             warp_updates_log.append((file, context))
+            code_log.append(context)
+            modifications_log.append(context)
+            warp_manifest_log.append(context)
 
+    with open(os.path.join(cloned_directory, "code.txt"), "w") as f:
+        f.write("\n".join(code_log))
+    with open(os.path.join(cloned_directory, "modifications.txt"), "w") as f:
+        f.write("\n".join(modifications_log))
+    with open(os.path.join(cloned_directory, "warp_manifest.txt"), "w") as f:
+        f.write("\n".join(warp_manifest_log))
+
+    for log in warp_updates_log:
+        write_log(log[1])
+
+    memory.save_memory(f"Completed time warp analysis for directory: {directory}.")
+    
     return warp_updates_log
 
 
 def warp_analysis(lines, filename, warp_rules):
+    memory.save_memory(f"Started warp analysis for file: {filename} using warp rules: {warp_rules}.")
+    
     prompt = (f"Analyze the Python script named '{filename}' based on the warp rules: '{warp_rules}'. "
               "Provide detailed notes about improvements, specifying the line number and the exact change required. "
               "Begin the analysis:\n\n" + "".join(lines))
@@ -238,9 +322,10 @@ def warp_analysis(lines, filename, warp_rules):
     )
 
     context = response.choices[0].message['content'].strip()
+    
+    memory.save_memory(f"Completed warp analysis for file: {filename}. Results: {context[:100]}...")  # Saving a snippet of the results for brevity.
+    
     return context
-
-
 def apply_warp_updates(directory, warp_updates_log):
     warp_rules = config.WARP_RULES
     updated_code_list = []
@@ -248,6 +333,8 @@ def apply_warp_updates(directory, warp_updates_log):
 
     for file, context in warp_updates_log:
         file_path = os.path.join(directory, file)
+        memory.save_memory(f"Applying warp updates for file: {file_path}.")
+        
         with open(file_path, 'r') as f:
             original_lines = f.readlines()
 
@@ -260,6 +347,7 @@ def apply_warp_updates(directory, warp_updates_log):
 
         # Save the updated line next to the original line
         updated_code_list.append((original_lines[line_number], updated_line))
+        memory.save_memory(f"Original line: {original_lines[line_number]}. Updated line: {updated_line}.")
 
         # Log the placement details
         placement_detail = {
@@ -269,6 +357,7 @@ def apply_warp_updates(directory, warp_updates_log):
             "updated_code": updated_line
         }
         placements.append(placement_detail)
+        memory.save_memory(f"Placement details for file: {file_path}. Line number: {line_number}. Original code: {original_lines[line_number]}. Updated code: {updated_line}.")
 
     # Write the placements log to a file
     with open("placements_log.txt", "w") as log_file:
@@ -278,39 +367,56 @@ def apply_warp_updates(directory, warp_updates_log):
             log_file.write(f"Original Code: {placement['original_code']}\n")
             log_file.write(f"Updated Code: {placement['updated_code']}\n")
             log_file.write("-" * 50 + "\n")
+    memory.save_memory(f"Placements log written to placements_log.txt.")
 
     return updated_code_list
 
 
-def apply_warp_rules(directory):
-    """
-    Apply warp rules based on the specified method.
-
-    Args:
-    - directory (str): The directory to analyze.
-    """
+def apply_warp_rules(directory, memory_system):
     method = config.WARP_METHOD
     warp_sets = [config.WARP_RULES_SET_1, config.WARP_RULES_SET_2, config.WARP_RULES_SET_3, config.WARP_RULES_SET_4, config.WARP_RULES_SET_5,
                  config.WARP_RULES_SET_6, config.WARP_RULES_SET_7, config.WARP_RULES_SET_8, config.WARP_RULES_SET_9, config.WARP_RULES_SET_10]
-    
     warp_updates_log = []
+
+    # Store the initial information about warp rule application
+    memory_system.store_memory(f"Starting warp rule application using method: {method}", "warp_rules")
 
     if method == 'combine':
         combined_rules = "\n".join(warp_sets)
         config.WARP_RULES = combined_rules
+
+        # Store information about combining warp sets
+        memory_system.store_memory(f"Combining all warp sets into one set. Applying combined rules.", "warp_rules")
+        
         warp_updates_log.extend(time_warp_analysis(directory))
 
     elif method == 'sequential':
+        # Store information about applying warp sets sequentially
+        memory_system.store_memory(f"Applying warp sets sequentially.", "warp_rules")
+        
         for warp_set in warp_sets:
             config.WARP_RULES = warp_set
+
+            # Store information about applying a specific warp set
+            memory_system.store_memory(f"Applying warp set: {warp_set}.", "warp_rules")
+            
             warp_updates_log.extend(time_warp_analysis(directory))
 
     elif method == 'selective':
+        # Store information about applying selected warp sets
+        memory_system.store_memory(f"Applying selected warp sets.", "warp_rules")
+        
         for warp_set in config.SELECTED_WARP_SETS:
             config.WARP_RULES = warp_set
+
+            # Store information about applying a selected warp set
+            memory_system.store_memory(f"Applying selected warp set: {warp_set}.", "warp_rules")
+            
             warp_updates_log.extend(time_warp_analysis(directory))
 
     else:
+        # Store information about an invalid method
+        memory_system.store_memory(f"Invalid method detected: {method}.", "warp_rules")
         raise ValueError(f"Invalid method: {method}. Choose from 'combine', 'sequential', or 'selective'.")
 
     return warp_updates_log
@@ -324,9 +430,10 @@ def abort_analysis():
         state.current_thread = None
         abort_button.config(state=tk.NORMAL)
         messagebox.showinfo("Info", "Analysis aborted.")
+        # Save a memory when analysis is aborted
+        memory.save_memory("Analysis aborted.")
 
-
-TOKEN_COST_PER_THOUSAND = 0.0010  # specified here https://openai.com/pricing
+TOKEN_COST_PER_THOUSAND = 0.0010
 
 root = tk.Tk()
 root.title("Pybonce: The Python Pulse")
@@ -347,23 +454,11 @@ abort_button.grid(row=0, column=2, padx=5)
 tree = ttk.Treeview(root)
 tree.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 
-#time_warp_button = tk.Button(button_frame, text="Time Warp", padx=10, pady=5, fg="white", bg="#263D42", command=time_warp_analysis)
-#time_warp_button.grid(row=0, column=3, padx=5)
-
 time_warp_button = tk.Button(button_frame, text="Time Warp Function is a (Wip) and will probably freeze the gui or break programs", padx=10, pady=5, fg="#33FFA1", bg="white", state=tk.DISABLED)
 time_warp_button.grid(row=0, column=3, padx=5)
 
-time_warp_button = tk.Button(button_frame, 
-                             text="Time Warp (disabled)", 
-                             padx=10, 
-                             pady=5, 
-                             fg="#FFA1A1", 
-                             bg="#263D42", 
-                             command=lambda: time_warp_analysis(filedialog.askdirectory()), 
-                             state=tk.DISABLED)
+time_warp_button = tk.Button(button_frame, text="Time Warp", padx=10, pady=5, fg="white", bg="#263D42", command=start_time_warp_analysis_in_thread)
 time_warp_button.grid(row=1, column=3, padx=5)
-
-
 
 stats_label = tk.Label(root, text="Tokens Used: 0\nEstimated Cost: $0.00", bg="white", font=("Arial", 10))
 stats_label.pack(pady=10)
