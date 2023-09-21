@@ -8,7 +8,7 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------
 # OpenAI Configuration   
 # OpenAI API Key
-API_KEY = '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'
+API_KEY = 'key here'
 
 LINES_PER_API_CALL = 10  # Number of lines to send to OpenAI API in a single call
 
