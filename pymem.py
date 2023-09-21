@@ -5,7 +5,7 @@ import config
 openai.api_key = config.API_KEY
 
 
-class MemorySystem:
+class Brain_matter:
     def __init__(self):
         self.memory_path = "memory_files"
         self.reference_path = "memory_reference"
