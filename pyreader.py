@@ -209,9 +209,16 @@ def process_directory(directory):
 
 def establish_context(lines, filename):
     prompt = (f"Thoroughly analyze the Python script named '{filename}' as if you are a seasoned Python and Windows expert. "
-              # ... [rest of the prompt remains unchanged]
+              "For each section or line of code, provide detailed feedback segmented into the following categories:\n"
+              "- **Performance**: Are there any inefficiencies? How can they be optimized?\n"
+              "- **Style**: Does the code follow best practices for readability and Pythonic style? How can it be made clearer?\n"
+              "- **Security**: Are there potential vulnerabilities or unsafe practices?\n"
+              "- **Functionality**: Are there potential bugs or areas of improvement in the logic?\n"
+              "For each suggestion, explain the reasoning behind it. If a section is already optimal, acknowledge it. "
+              "For place holders in .py files show best possible viable code based on previous suggestions"
+              "Ensure a comprehensive review.\n\n"
+              "After the analysis, provide a section titled 'MODIFICATIONS' where you list all the specific changes to be made to the code. "
               "Begin the analysis:\n\n" + "".join(lines))
-
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
