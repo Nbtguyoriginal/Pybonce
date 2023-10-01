@@ -10,23 +10,27 @@ class Brain_matter:
         self.memory_path = "memory_files"
         self.reference_path = "memory_reference"
         self.subconscious_path = "subconscious"
-        openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    def store_memory(self, content, memory_type):
-        # Create memory directory if it doesn't exist
-        if not os.path.exists(self.memory_path):
-            os.makedirs(self.memory_path)
+    def save_memory(self, content, memory_type):
+        # Create subconscious directory if it doesn't exist
+        if not os.path.exists(self.subconscious_path):
+            os.makedirs(self.subconscious_path)
 
-        # Save the full content to subconscious
+    # Save the full content to subconscious
         with open(os.path.join(self.subconscious_path, f"{memory_type}.txt"), "a") as f:
             f.write(content + "\n")
 
-        # Summarize the content
+    # Create memory directory if it doesn't exist
+        if not os.path.exists(self.memory_path):
+            os.makedirs(self.memory_path)
+
+    # Summarize the content
         summarized_content = self.summarize_memory(content)
 
-        # Save the summarized content to memory
+    # Save the summarized content to memory
         with open(os.path.join(self.memory_path, f"{memory_type}.txt"), "a") as f:
             f.write(summarized_content + "\n")
+
 
     def summarize_memory(self, content):
         response = openai.ChatCompletion.create(
