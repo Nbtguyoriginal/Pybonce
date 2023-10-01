@@ -11,7 +11,8 @@ from PyCells import Brain_matter
 
 
 openai.api_key = config.API_KEY
-brain_matter = Brain_matter()
+memory = Brain_matter()
+
 
 
 class AnalysisState:
@@ -28,24 +29,25 @@ def start_time_warp_analysis_in_thread():
     if directory:  # Check if a directory was selected
         threading.Thread(target=time_warp_analysis, args=(directory,)).start()
     # Save a memory when Time Warp function is triggered
-    memory.save_memory("Time Warp analysis started for directory: " + directory)
+    memory.save_memory("Time Warp analysis started for directory: " + directory, "time_warp_start")
     
 def setup_text_tags():
     analysis_text.tag_configure('sending', background=config.SENDING_COLOR, font=("Arial", 10))
     # Save a memory for 'sending' tag configuration
-    memory.save_memory("Configured 'sending' tag with background color: " + config.SENDING_COLOR)
+    memory.save_memory("Configured 'sending' tag with background color: " + config.SENDING_COLOR, "tag_configuration")
 
     analysis_text.tag_configure('analysis', background=config.ANALYSIS_COLOR, font=("Arial", 10))
     # Save a memory for 'analysis' tag configuration
-    memory.save_memory("Configured 'analysis' tag with background color: " + config.ANALYSIS_COLOR)
+    memory.save_memory("Configured 'analysis' tag with background color: " + config.ANALYSIS_COLOR, "tag_configuration")
 
     analysis_text.tag_configure('title', background=config.TITLE_COLOR, font=("Arial", 10, 'bold'))
     # Save a memory for 'title' tag configuration
-    memory.save_memory("Configured 'title' tag with background color: " + config.TITLE_COLOR)
+    memory.save_memory("Configured 'title' tag with background color: " + config.TITLE_COLOR, "tag_configuration")
 
     analysis_text.tag_configure('highlight', background=config.HIGHLIGHT_COLOR, font=("Arial", 10))
     # Save a memory for 'highlight' tag configuration
-    memory.save_memory("Configured 'highlight' tag with background color: " + config.HIGHLIGHT_COLOR)
+    memory.save_memory("Configured 'highlight' tag with background color: " + config.HIGHLIGHT_COLOR, "tag_configuration")
+
 
 
 
@@ -54,12 +56,11 @@ def select_directory():
     if not folder_selected:
         messagebox.showerror("Error", "No directory selected.")
         # Save a memory for the error when no directory is selected
-        memory.save_memory("User attempted to select a directory but did not choose any.")
+        memory.save_memory("User attempted to select a directory but did not choose any.", "directory_selection_error")
         return
     load_treeview(folder_selected)
     # Save a memory for the successful directory selection
-    memory.save_memory(f"User successfully selected the directory: {folder_selected}")
-
+    memory.save_memory(f"User successfully selected the directory: {folder_selected}", "directory_selection")
 
 
 def load_treeview(directory):
@@ -85,9 +86,9 @@ def write_log(content, log_type=config.LOG_TYPES["default"]):
         log_file.write(content + "\n\n")
         
     # Save a memory for the log entry written
-    memory.save_memory(f"Log entry written to {log_filename}. Content: {content[:50]}...")  # Saving only the first 50 characters for brevity
+    memory.save_memory(f"Log entry written to {log_filename}. Content: {content[:50]}...", "log_entry_written")  # Saving only the first 50 characters for brevity
     # Save a memory for the type of log written
-    memory.save_memory(f"Log type used: {log_type}")
+    memory.save_memory(f"Log type used: {log_type}", "log_type_used")
 
 
 
@@ -142,7 +143,8 @@ def start_analysis():
     state.current_thread.start()
     abort_button.config(state=tk.DISABLED)
     # Save a memory when analysis starts
-    memory.save_memory("Analysis started for directory: " + directory)
+    memory.save_memory("Analysis started for directory: " + directory, "analysis_start")
+
 
 
 
@@ -246,9 +248,9 @@ def establish_context(lines, filename):
         write_log(context, log_type=config.LOG_TYPES["default"])
 
     # Save a memory for the script analysis
-    memory.save_memory(f"Analyzed script: {filename}. Tokens used: {tokens_used}. Estimated cost: ${estimated_cost:.2f}.")
+    memory.save_memory(f"Analyzed script: {filename}. Tokens used: {tokens_used}. Estimated cost: ${estimated_cost:.2f}.", "script_analysis")
     # Save a memory for the estimated cost of the analysis
-    memory.save_memory(f"Estimated cost for analyzing {filename}: ${estimated_cost:.2f}.")
+    memory.save_memory(f"Estimated cost for analyzing {filename}: ${estimated_cost:.2f}.", "analysis_cost")
 
     return [context], highlighted_lines, tokens_used, estimated_cost
 
@@ -271,13 +273,13 @@ def clone_directory(source_directory):
     shutil.copytree(source_directory, cloned_directory)
     
     # Save a memory for the directory cloning
-    memory.save_memory(f"Cloned directory from '{source_directory}' to '{cloned_directory}'.")
+    memory.save_memory(f"Cloned directory from '{source_directory}' to '{cloned_directory}'.", "directory_clone")
     
     return cloned_directory
 
 
 def time_warp_analysis(directory):
-    memory.save_memory(f"Started time warp analysis for directory: {directory}.")
+    memory.save_memory(f"Started time warp analysis for directory: {directory}.", "time_warp_analysis_start")
     
     cloned_directory = clone_directory(directory)
     load_treeview(cloned_directory)
@@ -316,7 +318,7 @@ def time_warp_analysis(directory):
 
 
 def warp_analysis(lines, filename, warp_rules):
-    memory.save_memory(f"Started warp analysis for file: {filename} using warp rules: {warp_rules}.")
+    memory.save_memory(f"Started warp analysis for file: {filename} using warp rules.", "warp_analysis_start")
     
     prompt = (f"Analyze the Python script named '{filename}' based on the warp rules: '{warp_rules}'. "
               "Provide detailed notes about improvements, specifying the line number and the exact change required. "
@@ -332,7 +334,7 @@ def warp_analysis(lines, filename, warp_rules):
 
     context = response.choices[0].message['content'].strip()
     
-    memory.save_memory(f"Completed warp analysis for file: {filename}. Results: {context[:100]}...")  # Saving a snippet of the results for brevity.
+    memory.save_memory(f"Completed warp analysis for file: {filename}. Results: {context[:100]}...", "warp_analysis_complete")  # Saving a snippet of the results for brevity.
     
     return context
 def apply_warp_updates(directory, warp_updates_log):
@@ -376,7 +378,7 @@ def apply_warp_updates(directory, warp_updates_log):
             log_file.write(f"Original Code: {placement['original_code']}\n")
             log_file.write(f"Updated Code: {placement['updated_code']}\n")
             log_file.write("-" * 50 + "\n")
-    memory.save_memory(f"Placements log written to placements_log.txt.")
+    memory.save_memory(f"Placements log written to placements_log.txt.", "placements_log_written")
 
     return updated_code_list
 
@@ -440,7 +442,8 @@ def abort_analysis():
         abort_button.config(state=tk.NORMAL)
         messagebox.showinfo("Info", "Analysis aborted.")
         # Save a memory when analysis is aborted
-        memory.save_memory("Analysis aborted.")
+        memory.save_memory("Analysis aborted.", "analysis_abort")
+
 
 TOKEN_COST_PER_THOUSAND = 0.0010
 
