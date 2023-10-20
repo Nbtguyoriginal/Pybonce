@@ -1,7 +1,7 @@
 # PyBonce: Python Script Analyzer 🐍🔍
 
 <div align="center">
-    <img src="[![Image 1](https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739)](https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739)">
+    <img src="https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739" width="200">
     <details>
       <summary>Click to reveal the first message!</summary>
       Message 1.1
@@ -17,7 +17,7 @@
 </div>
 
 <div align="center">
-    <img src="![Image 2](https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg)">
+    <img src="https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg" width="200">
     <details>
       <summary>Click to reveal the first message!</summary>
       Message 2.1
@@ -33,7 +33,7 @@
 </div>
 
 <div align="center">
-    <img src="https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg" width="200">
+    <img src="https://i.ibb.co/Dg4tCXH/image-2023-10-20-154445048.png" width="200">
     <details>
       <summary>Click to reveal the first message!</summary>
       Message 3.1
@@ -47,6 +47,7 @@
       </details>
     </details>
 </div>
+
 
 
 
