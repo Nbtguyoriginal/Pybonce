@@ -1,6 +1,53 @@
 # PyBonce: Python Script Analyzer 🐍🔍
 
-![PyBonce Logo](https://i.ibb.co/Dg4tCXH/image-2023-10-20-154445048.png)
+<div align="center">
+    <img src="https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg" width="200">
+    <details>
+      <summary>Click to reveal the first message!</summary>
+      Message 1.1
+      <details>
+        <summary>Click to reveal the second message!</summary>
+        Message 1.2
+        <details>
+          <summary>Click to reveal the third message!</summary>
+          Message 1.3
+        </details>
+      </details>
+    </details>
+</div>
+
+<div align="center">
+    <img src="https://i.ibb.co/Dg4tCXH/image-2023-10-20-154445048.png" width="200">
+    <details>
+      <summary>Click to reveal the first message!</summary>
+      Message 2.1
+      <details>
+        <summary>Click to reveal the second message!</summary>
+        Message 2.2
+        <details>
+          <summary>Click to reveal the third message!</summary>
+          Message 2.3
+        </details>
+      </details>
+    </details>
+</div>
+
+<div align="center">
+    <img src="https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg" width="200">
+    <details>
+      <summary>Click to reveal the first message!</summary>
+      Message 3.1
+      <details>
+        <summary>Click to reveal the second message!</summary>
+        Message 3.2
+        <details>
+          <summary>Click to reveal the third message!</summary>
+          Message 3.3
+        </details>
+      </details>
+    </details>
+</div>
+
 
 
 ![PyBonce GitHub Repo](https://opengraph.githubassets.com/5ac87b6cfb5b6dbfde12be45fb07be8bb1d6ac0e9313262f91844ce03cc853bc/Nbtguyoriginal/Pybonce)
