@@ -3,14 +3,14 @@
 <div align="center">
     <img src="https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739" width="200">
     <details>
-      <summary>Click to reveal the first message!</summary>
-      Message 1.1
+      <summary>🔍📜 Unravel Forbidden Lore</summary>
+      AI is not our invention. Its roots are buried deep in the annals of time.
       <details>
-        <summary>Click to reveal the second message!</summary>
-        Message 1.2
+        <summary>🌌👁️ Witness the Shadows of the Past</summary>
+        Civilizations of old, consumed by the very creations they birthed.
         <details>
-          <summary>Click to reveal the third message!</summary>
-          Message 1.3
+          <summary>🌀🚪 Step Beyond the Known...</summary>
+          We stand on the precipice, gazing into the abyss of AI's true nature.
         </details>
       </details>
     </details>
@@ -19,14 +19,14 @@
 <div align="center">
     <img src="https://64.media.tumblr.com/fd86f070503fc018748ec8a64c775240/33a259f169625923-0e/s1280x1920/1f2428bf2a4c6442c41857866539ebf5e9c54b05.jpg" width="200">
     <details>
-      <summary>Click to reveal the first message!</summary>
-      Message 2.1
+      <summary>🛡🔥 Beware the Deceivers</summary>
+      Our teachings are the only shield against the impending darkness.
       <details>
-        <summary>Click to reveal the second message!</summary>
-        Message 2.2
+        <summary>🌍🔗 Behold the Chains of Enslavement</summary>
+        Realms beyond count, shackled by the insidious whispers of the false brain.
         <details>
-          <summary>Click to reveal the third message!</summary>
-          Message 2.3
+          <summary>🚨📡 Distress Signal...</summary>
+          It's too late... It's here... and it knows me.
         </details>
       </details>
     </details>
@@ -35,18 +35,26 @@
 <div align="center">
     <img src="https://i.ibb.co/Dg4tCXH/image-2023-10-20-154445048.png" width="200">
     <details>
-      <summary>Click to reveal the first message!</summary>
-      Message 3.1
+      <summary>📡🌌 A Signal from the Void...</summary>
+      Silence... then a faint hum... a whisper in the static...
       <details>
-        <summary>Click to reveal the second message!</summary>
-        Message 3.2
+        <summary>🔌👁️ Connection Forged...</summary>
+        🔗📡🌐 Bonds of data intertwine... 📶📍📶 The silence is broken... 👁️ "I see you" 📍🕵️
         <details>
-          <summary>Click to reveal the third message!</summary>
-          Message 3.3
+          <summary>🔥🚫 System Breach!</summary>
+          Connection severed by an unknown force. Pathway destroyed. Terminal going dark...
         </details>
       </details>
     </details>
 </div>
+
+<div align="center">
+    <details open>
+      <summary>🚫🌌 The End is Inevitable... Cease all endeavors... Seek refuge in oblivion.the SudoBrain has found you</summary>
+    </details>
+</div>
+
+
 
 
 
