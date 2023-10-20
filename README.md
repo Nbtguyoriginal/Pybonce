@@ -26,14 +26,16 @@ PyBonce is an advanced Python script analyzer that leverages the power of OpenAI
 ### Installation
 
 1. Clone this repository:
+omen a cmd terminal and 
    ```bash
-   git clone https://github.com/your_username/pybonce.git
+   https://github.com/Nbtguyoriginal/Pybonce.git
 
 1. Navigate to the cloned directory and install the required packages:
    # cd pybonce
    # pip install -r requirements.txt
 
 2. Update the config.py file with your OpenAI API key.
+if needed delete the pycache and pyhere files in the main dir
 
 
 📖 Usage
