@@ -1,7 +1,7 @@
 # PyBonce: Python Script Analyzer 🐍🔍
 
 <div align="center">
-    <img src="![Image 1](https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739)">
+    <img src="[![Image 1](https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739)](https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739)">
     <details>
       <summary>Click to reveal the first message!</summary>
       Message 1.1
