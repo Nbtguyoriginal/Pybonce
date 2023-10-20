@@ -22,8 +22,18 @@ Feel free to clone or download. No need to download the release.
 
 </div>
 
+Of course! Let's structure and style the provided content for better readability and presentation in the `README.md` file:
+
+```markdown
 ---
 
+<div align="center">
+
+# 🌟 Pybonce: Python Code Analysis Tool
+
+</div>
+
+---
 
 ## 🌟 Features
 
@@ -45,48 +55,67 @@ Feel free to clone or download. No need to download the release.
 ### Installation
 
 1. Clone this repository:
-omen a cmd terminal and 
    ```bash
-   https://github.com/Nbtguyoriginal/Pybonce.git
+   git clone https://github.com/Nbtguyoriginal/Pybonce.git
+   ```
+2. Navigate to the cloned directory and install the required packages:
+   ```cmd
+   cd pybonce
+   pip install -r requirements.txt
+   ```
+3. Update the `config.py` file with your OpenAI API key. If needed, delete the `__pycache__` and `.pyc` files in the main directory.
+4. cobfig the logs for your use case in the config.py
 
-1. Navigate to the cloned directory and install the required packages:
-   # cd pybonce
-   # pip install -r requirements.txt
+---
 
-2. Update the config.py file with your OpenAI API key.
-if needed delete the pycache and pyhere files in the main dir
+## 📖 Usage
 
+Run `pybonce.py`. Use the GUI to select a directory containing Python files. Click "Start Analysis" it will reprompt you to select the directory to initiate the code review. View results in the GUI and in the specified log file.
+```bash
+#path/python pybonce.py-- to run the script 
+```
+> **Important Advisory for Users**: If you haven't been directly involved in the development of this project, please exercise caution. We strongly recommend utilizing the current release version available for general use. The main directory, especially in the development branch, contains configurations and settings that might need slight modifications to function optimally. These adjustments are typically handled by our development team. Using the current release ensures that you're working with a stable, tested, and optimized version of the software, minimizing potential issues or disruptions.
 
-📖 Usage
-Run pybonce.py.
-Use the GUI to select a directory containing Python files.
-Click "Start Analysis" to initiate the code review.
-View results in the GUI and in the specified log file.
+---
 
-"**Important Advisory for Users:** If you haven't been directly involved in the development of this project, please exercise caution. We strongly recommend utilizing the current release version available for general use. The main directory, especially in the development branch, contains configurations and settings that might need slight modifications to function optimally. These adjustments are typically handled by our development team. Using the current release ensures that you're working with a stable, tested, and optimized version of the software, minimizing potential issues or disruptions."
+## 📈 Cost Implications
 
-📈 Cost Implications
 Each API call to OpenAI incurs a cost based on the number of tokens processed. Ensure you're aware of the potential costs, especially when analyzing large codebases.
 
-🙏 Contributing
+---
+
+## 🙏 Contributing
+
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Fork the Project
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-Push to the Branch (git push origin feature/AmazingFeature)
-Open a Pull Request
-📜 License
-Distributed under the MIT License. See LICENSE for more information.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-📞 Contact
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 📞 Contact
+
 Dont XD
 
-Project Link: https://github.com/Nbtguyoriginal/Pybonce/edit/main/README.md
+[Project Link](https://github.com/Nbtguyoriginal/Pybonce)
 
-🌟 Acknowledgements
-OpenAI
-Best-README-Template
-📜 License
-Distributed under the MIT License. See LICENSE for more information.
+---
+
+## 🌟 Acknowledgements
+
+- OpenAI
+- python
+- coffee
+
+---
+
 
