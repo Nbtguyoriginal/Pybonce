@@ -3,13 +3,13 @@
 ![PyBonce Logo]([link_to_logo_image](https://clipart-library.com/clipart/Lcd5axbbi.htm))  
 
 PyBonce is an advanced Python script analyzer that leverages the power of OpenAI's API. It's designed to provide developers with insights on performance, style, security, and functionality of their Python code. With a user-friendly GUI, PyBonce makes code analysis a breeze!
-
+```bash
 ________________________________________________________________________________________________________________
 
  If this line is set to true the main branch is stable and you can simpy clone no need for the dl the Release
 ______________________________________________________________________________________________________________
-
-Branch is stable //----------True---------//
+```bash
+#Branch is stable //----------True---------//
 ________________________________________________________________________________________________________________
 
 ## 🌟 Features
