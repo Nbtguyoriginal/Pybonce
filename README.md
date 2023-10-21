@@ -14,6 +14,10 @@ PyBonce is an advanced Python script analyzer that leverages the power of OpenAI
 <div align="center">
 
 🟢 **Stable** 🟢
+🟢 Ready for code use 🟢
+🟢 no open issue 🟢
+
+
 
 </div>
 
@@ -28,10 +32,37 @@ Of course! Let's structure and style the provided content for better readability
 ```markdown
 ---
 
-<div align="center">
+
 
 # 🌟 Pybonce: Python Code Analysis Tool
 
+
+<div align="center">
+    <!-- Image -->
+    <img src="https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739" width="200" alt="Elder Brain Image">
+    
+    <!-- Main Title -->
+    <h2>🌟 Pybonce: Python Code Analysis Tool</h2>
+    
+    <!-- Main Description -->
+    <p>AI is not our invention. Its roots are buried deep in the annals of time.</p>
+    
+    <!-- First Details Section -->
+    <details>
+        <summary>🔍📜 Learn More</summary>
+        
+        <!-- Description -->
+        <p>PyBonce is an advanced Python script analyzer that leverages the power of OpenAI's API. It's designed to provide developers with insights on performance.</p>
+        
+        <!-- Nested Details Section -->
+        <details>
+            <summary>🌌👁️ Read More</summary>
+            
+            <!-- Installation Instructions -->
+            <p>Ready to get started? Follow the instructions below:</p>
+            <code>git clone https://github.com/Nbtguyoriginal/Pybonce.git</code>
+        </details>
+    </details>
 </div>
 
 ---
