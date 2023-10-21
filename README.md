@@ -27,7 +27,7 @@ PyBonce is an advanced Python script analyzer that leverages the power of OpenAI
 # 🌟 Pybonce: Python Code Analysis Tool
 
 <div align="center">
-    <img src="https://static.wikia.nocookie.net/forgottenrealms/images/a/ad/Elder_brain_4e.jpg/revision/latest?cb=20200221190739" width="200" alt="Elder Brain Image">
+    <img src="https://mriquestions.com/uploads/3/4/5/7/34572113/6208716_orig.gif" width="200" alt="testing_curve">
     <h2>🌟 Pybonce: Python Code Analysis Tool</h2>
     <p>lets take a look at your code </p>
     <details>
